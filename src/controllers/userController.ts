@@ -20,4 +20,9 @@ export class UserController{
         let result = await UserService.createUser(req,res);
         res.json(result);
     }
+
+    public async login(req: express.Request,res: express.Response){
+        let result = await UserService.login(req,res);
+        res.json(result);
+    }
 }

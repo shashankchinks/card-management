@@ -1,8 +1,8 @@
 import express from "express";
 // import {userRoutes} from "./../routes/userRoutes";
-// import {UserController} from "./../controller/userController";
+import {UserController} from "./../controllers/userController";
 // import {AuthenticateService} from './../middleware/authenticate'
-//let userControllerObj = new UserController();
+let userControllerObj = new UserController();
 export class Routes{
     constructor(){
 
@@ -13,8 +13,8 @@ export class Routes{
             res.status(200).json({"success":"Server is running"});
         });
 
-        // app.post('/register', userControllerObj.createUser);
-        // app.post('/login',userControllerObj.login);
+        app.post('/register', userControllerObj.createUser);
+        app.post('/login',userControllerObj.login);
 
         // app.use(AuthenticateService.authenticate); //all thosa url which we want to authenticate it will come below of line or vice-versa
         
