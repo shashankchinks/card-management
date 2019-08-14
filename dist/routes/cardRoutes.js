@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var cardController_1 = require("./../controllers/cardController");
+var cardControllerObj = new cardController_1.CardController();
+exports.cardRoutes = express_1.Router();
+exports.cardRoutes.get('/', cardControllerObj.getAllCard);
+exports.cardRoutes.get('/getCardById/:id', cardControllerObj.getCardById);
+exports.cardRoutes.put('/updateCardById/:id', cardControllerObj.updateCardById);
+exports.cardRoutes.post('/createCard', cardControllerObj.createCard);

@@ -10,4 +10,19 @@ var bankSchema = new mongoose_1.default.Schema({
     createdDate: { type: Date, default: Date.now },
     updatedDate: { type: Date }
 });
-exports.userModel = mongoose_1.default.model('bank', bankSchema);
+var cardSchema = new mongoose_1.default.Schema({
+    name: { type: String, required: true, unique: true },
+    type: String,
+});
+var userSchema = new mongoose_1.default.Schema({
+    name: { type: String },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    mobile: { type: String },
+    active: Boolean,
+    createdDate: { type: Date, default: Date.now },
+    updatedDate: { type: Date }
+});
+exports.bankModel = mongoose_1.default.model('Bank', bankSchema);
+exports.cardModel = mongoose_1.default.model('Card', cardSchema);
+exports.userModel = mongoose_1.default.model('User', userSchema);
