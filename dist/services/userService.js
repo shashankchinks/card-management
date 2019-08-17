@@ -143,9 +143,49 @@ var UserService = /** @class */ (function () {
             });
         });
     };
+    UserService.getUsersAllCard = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getUsersAllCard, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, bankModel_1.userModel.find({ _id: req.user.userId }).populate('myCards').exec()];
+                    case 1:
+                        getUsersAllCard = _a.sent();
+                        return [2 /*return*/, getUsersAllCard];
+                    case 2:
+                        err_5 = _a.sent();
+                        console.log(err_5);
+                        return [2 /*return*/, err_5];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UserService.assignCardsToUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var assignCardsToUser, err_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, bankModel_1.userModel.update({ _id: req.user.userId }, req.body).exec()];
+                    case 1:
+                        assignCardsToUser = _a.sent();
+                        return [2 /*return*/, assignCardsToUser];
+                    case 2:
+                        err_6 = _a.sent();
+                        console.log(err_6);
+                        return [2 /*return*/, err_6];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     UserService.login = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, passwordMatched, options, payload, token, err_5;
+            var user, passwordMatched, options, payload, token, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -167,7 +207,8 @@ var UserService = /** @class */ (function () {
                         };
                         payload = {
                             "email": user.email,
-                            "name": user.name
+                            "name": user.name,
+                            "userId": user._id
                         };
                         return [4 /*yield*/, jwt.sign(payload, "secretkey", options)];
                     case 3:
@@ -178,9 +219,9 @@ var UserService = /** @class */ (function () {
                     case 6: return [2 /*return*/, "user not registered by email"];
                     case 7: return [3 /*break*/, 9];
                     case 8:
-                        err_5 = _a.sent();
-                        console.log(err_5);
-                        return [2 /*return*/, err_5];
+                        err_7 = _a.sent();
+                        console.log(err_7);
+                        return [2 /*return*/, err_7];
                     case 9: return [2 /*return*/];
                 }
             });

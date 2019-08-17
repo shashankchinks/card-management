@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
+var mongoose_2 = require("mongoose");
 var bankSchema = new mongoose_1.default.Schema({
     name: { type: String, required: true, unique: true },
     active: { type: Boolean },
@@ -13,9 +14,9 @@ var bankSchema = new mongoose_1.default.Schema({
 var cardSchema = new mongoose_1.default.Schema({
     name: { type: String, required: true, unique: true },
     type: String,
-    createdDate: { type: Date, default: Date.now }
-    // bank: {type:Types.ObjectId, ref:'bank'},
-    // user: {type:Types.ObjectId, ref:'user'}
+    createdDate: { type: Date, default: Date.now },
+    bank: { type: mongoose_2.SchemaTypes.ObjectId, ref: 'Bank' },
+    user: { type: mongoose_2.SchemaTypes.ObjectId, ref: 'User' } //created foriegn key
 });
 var userSchema = new mongoose_1.default.Schema({
     name: { type: String },
@@ -23,6 +24,7 @@ var userSchema = new mongoose_1.default.Schema({
     password: { type: String, required: true },
     mobile: { type: String },
     active: Boolean,
+    myCards: [{ type: mongoose_1.default.SchemaTypes.ObjectId, ref: "Card" }],
     createdDate: { type: Date, default: Date.now },
     updatedDate: { type: Date }
 });

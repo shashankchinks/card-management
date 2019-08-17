@@ -7,4 +7,6 @@ exports.userRoutes = express_1.Router();
 exports.userRoutes.get('/', userControllerObj.getAllUser);
 exports.userRoutes.get('/getUserById/:id', userControllerObj.getUserById);
 exports.userRoutes.put('/updateUserById/:id', userControllerObj.updateUserById);
+exports.userRoutes.get('/getUsersAllCard', userControllerObj.getUsersAllCard);
+exports.userRoutes.post('/assignCardsToUser', userControllerObj.assignCardsToUser);
 // userRoutes.post('/createUser',userControllerObj.createUser);

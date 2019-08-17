@@ -41,15 +41,15 @@ var CardService = /** @class */ (function () {
     }
     CardService.getAllCard = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var allUser, err_1;
+            var allCards, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, bankModel_1.cardModel.find().exec()];
+                        return [4 /*yield*/, bankModel_1.cardModel.find().populate('bank').populate('user').exec()];
                     case 1:
-                        allUser = _a.sent();
-                        return [2 /*return*/, allUser];
+                        allCards = _a.sent();
+                        return [2 /*return*/, allCards];
                     case 2:
                         err_1 = _a.sent();
                         console.log(err_1);

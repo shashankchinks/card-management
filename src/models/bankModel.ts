@@ -1,4 +1,5 @@
 import mongoose, { Types } from "mongoose";
+import {SchemaTypes} from "mongoose";
 
 const bankSchema = new mongoose.Schema({
     name: {type: String, required:true, unique:true},
@@ -10,9 +11,9 @@ const bankSchema = new mongoose.Schema({
 const cardSchema = new mongoose.Schema({
     name: {type: String, required:true, unique:true},
     type: String,
-    createdDate: {type:Date, default: Date.now}
-    // bank: {type:Types.ObjectId, ref:'bank'},
-    // user: {type:Types.ObjectId, ref:'user'}
+    createdDate: {type:Date, default: Date.now},
+    bank: {type:SchemaTypes.ObjectId, ref:'Bank'}, //created foriegn key
+    user: {type:SchemaTypes.ObjectId, ref:'User'} //created foriegn key
 });
 
 const userSchema = new mongoose.Schema({
@@ -21,6 +22,7 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required:true},
     mobile: {type: String},
     active: Boolean,
+    myCards: [{type: mongoose.SchemaTypes.ObjectId, ref:"Card"}],
     createdDate: {type: Date, default:Date.now},
     updatedDate: {type: Date}
 });

@@ -1,5 +1,5 @@
 import express from "express";
-import {userModel} from "./../models/bankModel";
+import {userModel, cardModel} from "./../models/bankModel";
 import * as jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 export class UserService{
@@ -53,6 +53,26 @@ export class UserService{
         }
     }
 
+    public static async getUsersAllCard(req:any, res:express.Response){
+        try {
+            let getUsersAllCard = await userModel.find({_id:req.user.userId}).populate('myCards').exec();
+            return getUsersAllCard;
+        } catch (err) {
+            console.log(err);
+            return err;
+        }
+    }
+
+    public static async assignCardsToUser(req:any, res:express.Response){
+        try {
+            let assignCardsToUser = await userModel.update({_id:req.user.userId},req.body).exec();
+            return assignCardsToUser;
+        } catch (err) {
+            console.log(err);
+            return err;
+        }
+    }
+
     public static async login(req: express.Request, res: express.Response){
         try {
             //Check use exist -> by email
@@ -72,7 +92,8 @@ export class UserService{
                     //what exactly information we want to put in payload
                     let payload = {
                         "email" : user.email,
-                        "name" : user.name
+                        "name" : user.name,
+                        "userId" : user._id
                     }
 
                     let token = await jwt.sign(payload,"secretkey",options);

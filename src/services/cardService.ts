@@ -3,8 +3,8 @@ import {cardModel} from "./../models/bankModel";
 export class CardService{
     public static async getAllCard(req: express.Request, res: express.Response){
         try{
-            let allUser = await cardModel.find().exec();
-            return allUser;
+            let allCards = await cardModel.find().populate('bank').populate('user').exec();
+            return allCards;
         }
         catch(err){
             console.log(err);

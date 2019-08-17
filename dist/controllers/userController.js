@@ -109,6 +109,34 @@ var UserController = /** @class */ (function () {
             });
         });
     };
+    UserController.prototype.getUsersAllCard = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, userService_1.UserService.getUsersAllCard(req, res)];
+                    case 1:
+                        result = _a.sent();
+                        res.json(result);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UserController.prototype.assignCardsToUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, userService_1.UserService.assignCardsToUser(req, res)];
+                    case 1:
+                        result = _a.sent();
+                        res.json(result);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     return UserController;
 }());
 exports.UserController = UserController;
