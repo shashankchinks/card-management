@@ -27,9 +27,11 @@ export class UserService{
 
     public static async updateUserById(req:express.Request, res:express.Response){
         try {
-            let updateUserById:any = await userModel.findById(req.params.id).exec();
+            let updateUserById: any = await userModel.findById(req.params.id).exec();
+            console.log(updateUserById);
             updateUserById.name = req.body.name;
-            updateUserById.type = req.body.type;
+            updateUserById.mobile = req.body.mobile;
+            updateUserById.active = req.body.active;
             await updateUserById.save();
             return updateUserById;
         } catch (err) {
@@ -40,6 +42,8 @@ export class UserService{
     
     public static async createUser(req:express.Request, res:express.Response){
         try{
+            let encyptPassword = await bcrypt.hash(req.body.password, 12);
+            req.body.password = encyptPassword;
             let createUser = new userModel(req.body);
             await createUser.save();
             return createUser;
@@ -53,6 +57,7 @@ export class UserService{
         try {
             //Check use exist -> by email
             let user:any = await userModel.findOne({"email":req.body.email}).exec();
+            console.log(user);
             if(user){
                 //Check password match or not
                 let passwordMatched = await bcrypt.compare(req.body.password, user.password);

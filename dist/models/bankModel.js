@@ -13,6 +13,9 @@ var bankSchema = new mongoose_1.default.Schema({
 var cardSchema = new mongoose_1.default.Schema({
     name: { type: String, required: true, unique: true },
     type: String,
+    createdDate: { type: Date, default: Date.now }
+    // bank: {type:Types.ObjectId, ref:'bank'},
+    // user: {type:Types.ObjectId, ref:'user'}
 });
 var userSchema = new mongoose_1.default.Schema({
     name: { type: String },

@@ -12,6 +12,8 @@ export class UserController{
     }
 
     public async updateUserById(req:express.Request, res:express.Response){
+        // console.log(req.body);
+        // console.log(req.params);
         let result = await UserService.updateUserById(req,res);
         res.json(result);
     }

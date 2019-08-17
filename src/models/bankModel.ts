@@ -10,6 +10,7 @@ const bankSchema = new mongoose.Schema({
 const cardSchema = new mongoose.Schema({
     name: {type: String, required:true, unique:true},
     type: String,
+    createdDate: {type:Date, default: Date.now}
     // bank: {type:Types.ObjectId, ref:'bank'},
     // user: {type:Types.ObjectId, ref:'user'}
 });

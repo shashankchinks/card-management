@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// import {userRoutes} from "./../routes/userRoutes";
+var userRoutes_1 = require("./../routes/userRoutes");
+var cardRoutes_1 = require("./../routes/cardRoutes");
+var bankRoutes_1 = require("./../routes/bankRoutes");
 var userController_1 = require("./../controllers/userController");
-// import {AuthenticateService} from './../middleware/authenticate'
+var authenticate_1 = require("./../middleware/authenticate");
 var userControllerObj = new userController_1.UserController();
 var Routes = /** @class */ (function () {
     function Routes() {
@@ -13,8 +15,10 @@ var Routes = /** @class */ (function () {
         });
         app.post('/register', userControllerObj.createUser);
         app.post('/login', userControllerObj.login);
-        // app.use(AuthenticateService.authenticate); //all thosa url which we want to authenticate it will come below of line or vice-versa
-        // app.use('/user',userRoutes);
+        app.use(authenticate_1.AuthenticateService.authenticate); //all thosa url which we want to authenticate it will come below of line or vice-versa
+        app.use('/user', userRoutes_1.userRoutes);
+        app.use('/card', cardRoutes_1.cardRoutes);
+        app.use('/bank', bankRoutes_1.bankRoutes);
     };
     return Routes;
 }());

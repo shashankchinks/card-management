@@ -101,8 +101,10 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, bankModel_1.userModel.findById(req.params.id).exec()];
                     case 1:
                         updateUserById = _a.sent();
+                        console.log(updateUserById);
                         updateUserById.name = req.body.name;
-                        updateUserById.type = req.body.type;
+                        updateUserById.mobile = req.body.mobile;
+                        updateUserById.active = req.body.active;
                         return [4 /*yield*/, updateUserById.save()];
                     case 2:
                         _a.sent();
@@ -118,21 +120,25 @@ var UserService = /** @class */ (function () {
     };
     UserService.createUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var createUser, err_4;
+            var encyptPassword, createUser, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, bcrypt_1.default.hash(req.body.password, 12)];
+                    case 1:
+                        encyptPassword = _a.sent();
+                        req.body.password = encyptPassword;
                         createUser = new bankModel_1.userModel(req.body);
                         return [4 /*yield*/, createUser.save()];
-                    case 1:
+                    case 2:
                         _a.sent();
                         return [2 /*return*/, createUser];
-                    case 2:
+                    case 3:
                         err_4 = _a.sent();
                         console.log(err_4);
                         return [2 /*return*/, err_4];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -147,6 +153,7 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, bankModel_1.userModel.findOne({ "email": req.body.email }).exec()];
                     case 1:
                         user = _a.sent();
+                        console.log(user);
                         if (!user) return [3 /*break*/, 6];
                         return [4 /*yield*/, bcrypt_1.default.compare(req.body.password, user.password)];
                     case 2:

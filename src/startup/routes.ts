@@ -1,7 +1,9 @@
 import express from "express";
-// import {userRoutes} from "./../routes/userRoutes";
+import {userRoutes} from "./../routes/userRoutes";
+import {cardRoutes} from "./../routes/cardRoutes";
+import {bankRoutes} from "./../routes/bankRoutes";
 import {UserController} from "./../controllers/userController";
-// import {AuthenticateService} from './../middleware/authenticate'
+import {AuthenticateService} from './../middleware/authenticate'
 let userControllerObj = new UserController();
 export class Routes{
     constructor(){
@@ -16,9 +18,11 @@ export class Routes{
         app.post('/register', userControllerObj.createUser);
         app.post('/login',userControllerObj.login);
 
-        // app.use(AuthenticateService.authenticate); //all thosa url which we want to authenticate it will come below of line or vice-versa
+        app.use(AuthenticateService.authenticate); //all thosa url which we want to authenticate it will come below of line or vice-versa
         
-        // app.use('/user',userRoutes);
+        app.use('/user',userRoutes);
+        app.use('/card',cardRoutes);
+        app.use('/bank',bankRoutes);
         
     }
 }
